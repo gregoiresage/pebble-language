@@ -1,0 +1,36 @@
+{
+  "uuid": "9c23e00a-0f27-45d8-b68c-2b716a096e85",
+  "shortName": "pebble-language",
+  "longName": "pebble-language",
+  "companyName": "Grégoire Sage",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite", "basalt", "chalk"],
+  "enableMultiJS": true,
+  "watchapp": {
+    "watchface": false
+  },
+  "capabilities" : ["configurable"],
+  "appKeys": {
+    "language": 0
+  },
+  "resources": {
+    "media": [
+    {
+      "type": "raw",
+      "name": "LOCALE_ENGLISH",
+      "file": "locale_english.bin"
+    }, 
+    {
+      "type": "raw",
+      "name": "LOCALE_FRENCH",
+      "file": "locale_french.bin"
+    }, 
+    {
+      "type": "raw",
+      "name": "LOCALE_MARTIAN",
+      "file": "locale_martian.bin"
+    }
+    ]
+  }
+}

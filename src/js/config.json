@@ -1,0 +1,29 @@
+[
+{
+  "type": "section",
+  "items": [
+    {
+      "type": "select",
+      "id": "language",
+      "appKey": "language",
+      "defaultValue": "0",
+      "label": "Choose your language",
+      "options": [
+        { 
+          "label": "English", 
+          "value": 0
+        },
+        { 
+          "label": "French",
+          "value": 1 
+        },
+        { 
+          "label": "Martian",
+          "value": 2 
+        }
+      ]
+    }
+  ]
+},
+{ "type": "submit", "defaultValue": "Done" }
+]
