@@ -3,7 +3,7 @@
 static DictionaryIterator s_locale_dict;
 static uint8_t *s_dict_buffer = 0;
 
-void locale_load(uint32_t resource_locale) {
+void locale_init(uint32_t resource_locale) {
 
   ResHandle  locale_handle = resource_get_handle(resource_locale);
   int locale_size = resource_size(locale_handle);
@@ -43,6 +43,13 @@ void locale_load(uint32_t resource_locale) {
   }
 
   dict_write_end(&s_locale_dict);
+}
+
+void locale_deinit(){
+  if(s_dict_buffer) {
+    free(s_dict_buffer);
+    s_dict_buffer = NULL;
+  }
 }
 
 char *locale_str(int hashval) { 
