@@ -6,6 +6,9 @@
 
 import os.path
 from enamel.enamel import enamel
+from gen_dict import gen_loc_dict
+from dict2bin import dict_2_bin
+import json
 
 top = '.'
 out = 'build'
@@ -24,6 +27,16 @@ def configure(ctx):
     Universal configuration: add your change prior to calling ctx.load('pebble_sdk').
     """
     ctx.load('pebble_sdk')
+
+    # generate locale_default.json
+    json_dict = gen_loc_dict('src') 
+    json.dump(json_dict, open('resources/locale_default.json', "wb"), indent=2, sort_keys=True)
+
+    # generate locale_XXX.bin files
+    for subdir, dirs, files in os.walk('resources'):
+        for file in files:
+            if file.endswith(".json") and file.startswith("locale_") : 
+                dict_2_bin(subdir + os.sep + file)
 
 
 def build(ctx):

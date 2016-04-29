@@ -37,7 +37,7 @@ def gen_loc_dict(code_dir):
                   text = match.group('loc').decode('string_escape')
                   loc_dict[hash_djb2(text)] = text
 
-    return loc_dict
+    return {str(key) : value for (key, value) in loc_dict.iteritems()}
 
 def main():
     # arguments, print an example of correct usage.
@@ -51,18 +51,9 @@ def main():
     code_dir = sys.argv[1]
     output_filename = sys.argv[2]
 
-    hash_dict = gen_loc_dict(code_dir) 
-    json_dict = {str(key) : value for (key, value) in hash_dict.iteritems()}
+    json_dict = gen_loc_dict(code_dir) 
     json.dump(json_dict, open(output_filename, "wb"), indent=2, sort_keys=True)
     print("%s now has %d entries\n" % (output_filename, len(hash_dict)))
-    #create binary resource loadable as a pebble dictionary
-    with open(output_filename.replace('.json', '.bin'), 'wb') as output_bin:
-      output_bin.write(struct.pack('I', len(hash_dict))) #count of entries
-      for (key, value) in hash_dict.iteritems():
-        output_bin.write(struct.pack('I',key)) #key
-        output_bin.write(struct.pack('I',len(value) + 1)) #length of string including null
-        output_bin.write(value) #write string as c string
-        output_bin.write(struct.pack('B',0)) #null terminate string
 
 if __name__ == '__main__':
     main()

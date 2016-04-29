@@ -6,17 +6,7 @@ import struct
 import json
 import sys
 
-def main():
-    # arguments, print an example of correct usage.
-    if len(sys.argv) - 1 != 1:
-        print("********************")
-        print("Usage suggestion:")
-        print("python " + sys.argv[0] + " <locale_chinese.json>")
-        print("********************")
-        exit()
-
-    dict_filename = sys.argv[1]
-
+def dict_2_bin(dict_filename):
     json_dict = json.load(open(dict_filename, 'rb'))
     hash_dict = {int(key) : value for (key, value) in json_dict.iteritems() if key.isdigit()}
     #create binary resource loadable as a pebble dictionary
@@ -28,6 +18,17 @@ def main():
         output_bin.write(value.encode('utf-8')) #write string as c string
         output_bin.write(struct.pack('B',0)) #null terminate string
 
+def main():
+    # arguments, print an example of correct usage.
+    if len(sys.argv) - 1 < 1:
+        print("********************")
+        print("Usage suggestion:")
+        print("python " + sys.argv[0] + " <locale_chinese.json>")
+        print("********************")
+        exit()
 
+    for dict_filename in  sys.argv[1:]:
+        dict_2_bin(dict_filename)
+    
 if __name__ == '__main__':
     main()
