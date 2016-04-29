@@ -18,8 +18,8 @@
     "media": [
     {
       "type": "raw",
-      "name": "LOCALE_ENGLISH",
-      "file": "locale_english.bin"
+      "name": "LOCALE_DEFAULT",
+      "file": "locale_default.bin"
     }, 
     {
       "type": "raw",

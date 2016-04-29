@@ -42,12 +42,12 @@ static uint32_t get_resource_locale(LANGUAGEValue language){
   switch(language){
     case LANGUAGE_FRENCH  : return RESOURCE_ID_LOCALE_FRENCH;
     case LANGUAGE_MARTIAN : return RESOURCE_ID_LOCALE_MARTIAN;
-    default :               return RESOURCE_ID_LOCALE_ENGLISH;
+    default :               return RESOURCE_ID_LOCALE_DEFAULT;
   }
 }
 
 static void in_received_handler(DictionaryIterator *iter, void *context) {
-  locale_load(get_resource_locale(enamel_get_language()));
+  locale_init(get_resource_locale(enamel_get_language()));
   text_layer_set_text(text_layer, _("Press a button"));
 }
 
@@ -55,7 +55,7 @@ static void init(void) {
   enamel_init(0, 0);
   enamel_register_custom_inbox_received(in_received_handler);
 
-  locale_load(get_resource_locale(enamel_get_language()));
+  locale_init(get_resource_locale(enamel_get_language()));
 
   window = window_create();
   window_set_click_config_provider(window, click_config_provider);
@@ -69,6 +69,7 @@ static void init(void) {
 
 static void deinit(void) {
   window_destroy(window);
+  locale_deinit();
   enamel_deinit();
 }
 
