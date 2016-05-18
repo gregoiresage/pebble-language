@@ -53,7 +53,7 @@ def main():
 
     json_dict = gen_loc_dict(code_dir) 
     json.dump(json_dict, open(output_filename, "wb"), indent=2, sort_keys=True)
-    print("%s now has %d entries\n" % (output_filename, len(hash_dict)))
+    print("%s now has %d entries\n" % (output_filename, len(json_dict)))
 
 if __name__ == '__main__':
     main()
